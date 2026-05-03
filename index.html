@@ -23,34 +23,25 @@
         body {
             margin: 0; padding: 0; background: linear-gradient(135deg, var(--bg) 0%, #1e1b4b 100%);
             color: var(--text); min-height: 100vh; overflow-x: hidden;
-            /* شلنا خصائص الـ flex من الـ body عشان نقدر نتحكم بالشاشات بشكل مستقل */
         }
 
-        /* ------------------ شاشة البداية (الجديدة) ------------------ */
+        /* ------------------ شاشة البداية ------------------ */
         #start-screen {
             position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-            background-image: url('math.png'); /* الصورة اللي طلبتها */
+            background-image: url('math.png'); /* الصورة بتطلع واضحة تماماً */
             background-size: cover; background-position: center; background-repeat: no-repeat;
-            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            display: flex; flex-direction: column; align-items: center; 
+            justify-content: flex-end; /* تخلي الزر ينزل تحت آخر شيء */
+            padding-bottom: 80px; /* مسافة عن حافة الشاشة السفلية */
             z-index: 1000; transition: opacity 0.5s ease;
-        }
-
-        /* طبقة تظليل خفيفة فوق الصورة عشان النص يكون واضح */
-        #start-screen::before {
-            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.6); z-index: -1;
-        }
-
-        .main-title {
-            font-size: 5rem; color: white; text-shadow: 0 5px 20px rgba(0,0,0,0.9), 0 0 40px var(--primary);
-            margin-bottom: 50px; text-align: center; line-height: 1.2;
         }
 
         .btn-start {
             background: linear-gradient(135deg, var(--gold), #d97706);
             color: white; border: none; padding: 20px 50px; font-size: 2rem; font-weight: 900;
-            border-radius: 50px; cursor: pointer; box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+            border-radius: 50px; cursor: pointer; box-shadow: 0 10px 30px rgba(0,0,0,0.9);
             transition: 0.3s; animation: pulse 2s infinite; text-shadow: 0 2px 5px rgba(0,0,0,0.5);
+            width: 80%; max-width: 350px;
         }
         .btn-start:hover { transform: scale(1.05); box-shadow: 0 15px 40px rgba(245, 158, 11, 0.6); }
 
@@ -61,10 +52,10 @@
         }
         /* ----------------------------------------------------------- */
 
-        /* حاوية اللعبة الأساسية (تكون مخفية في البداية) */
+        /* حاوية اللعبة الأساسية */
         #game-container {
             display: none; flex-direction: column; align-items: center; justify-content: flex-start;
-            padding-top: 20px; width: 100%; min-height: 100vh;
+            padding-top: 20px; width: 100%; min-height: 100vh; padding-bottom: 50px;
         }
 
         h1.game-header { color: var(--gold); text-shadow: 0 4px 10px rgba(0,0,0,0.5); font-size: 2.5rem; margin-bottom: 5px; text-align: center; margin-top: 0;}
@@ -153,7 +144,6 @@
 
     <!-- ================= شاشة البداية ================= -->
     <div id="start-screen">
-        <div class="main-title">تحدي<br>النرد 🎲</div>
         <button class="btn-start" onclick="startGame()">ابدأ اللعبة 🚀</button>
     </div>
 
@@ -210,7 +200,7 @@
             setTimeout(() => {
                 startScreen.style.display = 'none';
                 gameContainer.style.display = 'flex';
-            }, 500); // ينتظر نص ثانية عشان حركة الاختفاء تخلص
+            }, 500); 
         }
 
         // بنك الأسئلة (24 سؤال فريد - 4 لكل رقم) - لا يتكرر
